@@ -1,0 +1,11 @@
+org\example\server_client\ClientMessage.class
+org\example\Main.class
+org\example\server_client\ServerClientCommunicator.class
+org\example\server_client\DocumentDataTypes.class
+org\example\server_client\SearchObject.class
+org\example\client\QueryManager.class
+org\example\bootstrapper\BootstrapperClient.class
+org\example\bootstrapper\BootstrapperRequests.class
+org\example\server_client\QueryType.class
+org\example\client\NoSQlClient.class
+org\example\server_client\Query.class

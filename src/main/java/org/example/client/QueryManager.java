@@ -1,177 +1,162 @@
 package org.example.client;
-
-import org.example.server_client.ClientMessage;
+import org.example.client.query.DatabaseQuery;
+import org.example.client.query.factory.DatabaseQueryFactory;
 import org.example.server_client.QueryType;
 import org.example.server_client.ServerClientCommunicator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
+import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Map;
 
 public class QueryManager {
     private Socket socket;
-    public QueryManager(Socket socket){
+    private String hostUrl;
+    private String username;
+    private String password;
+    private Map<QueryType, DatabaseQuery> databaseQueryMap;
+    public QueryManager(Socket socket,String hostUrl){
         this.socket=socket;
+        this.hostUrl=hostUrl;
+        DatabaseQueryFactory databaseQueryFactory=new DatabaseQueryFactory();
+        databaseQueryMap=databaseQueryFactory.databaseQueryMap(this);
+    }
+    public void login(String username,String password){
+        this.username=username;
+        this.password=password;
+        try{
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.put("username",username);
+            jsonObject.put("password",password);
+            ServerClientCommunicator.sendJson(socket,jsonObject);
+            JSONObject messageFromServer= ServerClientCommunicator.readJson(socket);
+            if(((Long)messageFromServer.get("code_number"))==1){
+                throw new RuntimeException((String) messageFromServer.get("error_message"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("logged in ");
     }
     public void createDatabase(String databaseName){
-        try{
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("queryType",QueryType.CREATE_DATABASE.toString());
             jsonObject.put("databaseName",databaseName);
-            ServerClientCommunicator.sendObject(socket,jsonObject);
-            ClientMessage message= (ClientMessage) ServerClientCommunicator.readObj(socket);
-            if(message.getCodeNumber()==1){
-                throw new RuntimeException(message.getErrorMessage());
-            }
-        }catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+            execute(jsonObject);
     }
     public void deleteDatabase(String databaseName){
-        try{
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("queryType",QueryType.DELETE_DATABASE.toString());
             jsonObject.put("databaseName",databaseName);
-            ServerClientCommunicator.sendObject(socket,jsonObject);
-            ClientMessage message= (ClientMessage) ServerClientCommunicator.readObj(socket);
-            if(message.getCodeNumber()==1){
-                throw new RuntimeException(message.getErrorMessage());
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+            execute(jsonObject);
     }
     public void createCollection(String databaseName,String collectionName,JSONObject schema){
-        try{
-            JSONObject jsonObject=new JSONObject();
-            jsonObject.put("queryType",QueryType.CREATE_COLLECTION.toString());
-            jsonObject.put("databaseName",databaseName);
-            jsonObject.put("collectionName",collectionName);
-            jsonObject.put("schema",schema);
-            ServerClientCommunicator.sendObject(socket,jsonObject);
-            ClientMessage message= (ClientMessage) ServerClientCommunicator.readObj(socket);
-            if(message.getCodeNumber()==1){
-                throw new RuntimeException(message.getErrorMessage());
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("queryType",QueryType.CREATE_COLLECTION.toString());
+        jsonObject.put("databaseName",databaseName);
+        jsonObject.put("collectionName",collectionName);
+        jsonObject.put("schema",schema);
+        execute(jsonObject);
     }
     public void deleteCollection(String databaseName,String collectionName){
-        try{
+
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("queryType",QueryType.DELETE_COLLECTION.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
-            ServerClientCommunicator.sendObject(socket,jsonObject);
-            ClientMessage message= (ClientMessage) ServerClientCommunicator.readObj(socket);
-            if(message.getCodeNumber()==1){
-                throw new RuntimeException(message.getErrorMessage());
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        execute(jsonObject);
+
     }
     public void createDocument(String databaseName,String collectionName,JSONObject document){
-        try{
+
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("queryType",QueryType.CREATE_DOCUMENT.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             jsonObject.put("document",document);
-            ServerClientCommunicator.sendObject(socket,jsonObject);
-            ClientMessage message= (ClientMessage) ServerClientCommunicator.readObj(socket);
+        execute(jsonObject);
 
-            if(message.getCodeNumber()==1){
-                throw new RuntimeException(message.getErrorMessage());
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
     public void deleteDocument(String databaseName,String collectionName,String documentId){
-        try{
+
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("queryType",QueryType.DELETE_DOCUMENT.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             jsonObject.put("documentId",documentId);
-            ServerClientCommunicator.sendObject(socket,jsonObject);
-            ClientMessage message= (ClientMessage) ServerClientCommunicator.readObj(socket);
-            if(message.getCodeNumber()==1){
-                throw new RuntimeException(message.getErrorMessage());
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            execute(jsonObject);
+
         }
-    }
     public void createIndex(String databaseName,String collectionName,JSONObject indexProperty){
-        try{
+
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("queryType",QueryType.CREATE_INDEX.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             jsonObject.put("indexProperty",indexProperty);
-            ServerClientCommunicator.sendObject(socket,jsonObject);
-            ClientMessage message= (ClientMessage) ServerClientCommunicator.readObj(socket);
-            if(message.getCodeNumber()==1){
-                throw new RuntimeException(message.getErrorMessage());
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            execute(jsonObject);
         }
-    }
     public JSONArray find(String databaseName, String collectionName, JSONObject searchObject){
-        try{
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("queryType",QueryType.FIND.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             jsonObject.put("searchObject",searchObject);
-            ServerClientCommunicator.sendObject(socket,jsonObject);
-            ClientMessage message= (ClientMessage) ServerClientCommunicator.readObj(socket);
-            if(message.getCodeNumber()==1){
-                throw new RuntimeException(message.getErrorMessage());
-            }
-            return message.getDataArray();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+            return (JSONArray) execute(jsonObject).get("data");
     }
     public JSONArray findAll(String databaseName,String collectionName){
-        try{
+
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("queryType",QueryType.FIND_ALL.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
-            ServerClientCommunicator.sendObject(socket,jsonObject);
-            ClientMessage message= (ClientMessage) ServerClientCommunicator.readObj(socket);
-            if(message.getCodeNumber()==1){
-                throw new RuntimeException(message.getErrorMessage());
-            }
-            return message.getDataArray();
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+            return (JSONArray) execute(jsonObject).get("data");
     }
     public JSONObject updateDocument(String databaseName,String collectionName,String documentId,JSONObject data){
-        try{
+
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("queryType",QueryType.UPDATE_DOCUMENT.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             jsonObject.put("documentId",documentId);
             jsonObject.put("data",data);
-            ServerClientCommunicator.sendObject(socket,jsonObject);
-            ClientMessage message= (ClientMessage) ServerClientCommunicator.readObj(socket);
-            if(message.getCodeNumber()==1){
-                throw new RuntimeException(message.getErrorMessage());
-            }
-            return message.getData();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            return (JSONObject) execute(jsonObject).get("data");
+    }
+    private JSONObject execute(JSONObject query){
+        QueryType queryType= QueryType.valueOf((String) query.get("queryType"));
+        return databaseQueryMap.get(queryType).execute(query,socket);
+    }
+    public JSONObject pingServer() throws IOException, ParseException, ClassNotFoundException {
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("queryType", QueryType.PING.toString());
+        return execute(jsonObject);
+    }
+    public void handleMessage(JSONObject messageFromServer,JSONObject query) throws IOException, ParseException, ClassNotFoundException {
+        if(((Long)messageFromServer.get("code_number"))==1){
+            throw new RuntimeException((String) messageFromServer.get("error_message"));
+        }
+        if(((Long)messageFromServer.get("code_number"))==2){
+            System.out.println("redirect");
+            redirect((JSONArray) messageFromServer.get("ports"),query,messageFromServer);
         }
     }
+    public Object redirect(JSONArray ports,JSONObject query,JSONObject messageFromServer) throws IOException, ParseException, ClassNotFoundException {
+        for(int i=0;i<ports.size();i++){
+            long port= (long) ((JSONObject)ports.get(i)).get("port");
+            socket=new Socket(hostUrl, (int) port);
+            login(username,password);
+            messageFromServer=pingServer();
+            if(((Long)messageFromServer.get("code_number"))==2){
+                continue;//server is over loaded
+            }
+            if(((Long)messageFromServer.get("code_number"))==1){
+                throw new RuntimeException((String) messageFromServer.get("error_message"));
+            }
+            messageFromServer=execute(query);
+            break;
+        }
+        return messageFromServer;
+    }
+
 }

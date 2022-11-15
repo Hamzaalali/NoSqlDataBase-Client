@@ -10,7 +10,7 @@ public class NoSQlClient {
     public void connect(String hostUrl,int port){
         try{
             socket=new Socket(hostUrl,port);
-            queryManager=new QueryManager(socket);
+            queryManager=new QueryManager(socket,hostUrl);
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -20,4 +20,6 @@ public class NoSQlClient {
     public QueryManager getQueryManager(){
         return queryManager;
     }
+
+
 }

@@ -1,19 +1,5 @@
-package org.example;
-import org.example.bootstrapper.BootstrapperClient;
-import org.example.client.NoSQlClient;
-import org.example.client.QueryManager;
-import org.example.server_client.DocumentDataTypes;
-import org.json.simple.JSONObject;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-
-public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        NoSQlClient noSQlClient=new NoSQlClient();
-        noSQlClient.connect("localhost",3001);
+ NoSQlClient noSQlClient=new NoSQlClient();
+        noSQlClient.connect("localhost",3000);
         QueryManager queryManager=noSQlClient.getQueryManager();
         queryManager.login("admin","admin");
         queryManager.createDatabase("bank");
@@ -48,7 +34,7 @@ public class Main {
 
         queryManager.createDocument("bank","agent",agent);
 
-        Thread.sleep(3000);
+
         agent=new JSONObject();
         name=new JSONObject();
         phones=new ArrayList<>();
@@ -67,22 +53,22 @@ public class Main {
 
 
 
-//        agent=new JSONObject();
-//        name=new JSONObject();
-//        phones=new ArrayList<>();
-//        phone=new JSONObject();
-//        phone.put("number","0796992566");
-//        phones.add(phone);
-//        agent.put("phones",phones);
-//        name.put("firstName","ahmad");
-//        name.put("secondName","alali");
-//        agent.put("name", name);
-//        agent.put("credit",20);
-//        agent.put("firstName","hamza");
-//
-//        queryManager.createDocument("bank","agent",agent);
+        agent=new JSONObject();
+        name=new JSONObject();
+        phones=new ArrayList<>();
+        phone=new JSONObject();
+        phone.put("number","0796992566");
+        phones.add(phone);
+        agent.put("phones",phones);
+        name.put("firstName","ahmad");
+        name.put("secondName","alali");
+        agent.put("name", name);
+        agent.put("credit",20);
+        agent.put("firstName","hamza");
 
-        Thread.sleep(3000);
+        queryManager.createDocument("bank","agent",agent);
+
+
 
         agent=new JSONObject();
         name=new JSONObject();
@@ -121,5 +107,3 @@ public class Main {
         searchObject.put("name",name);
         System.out.println(queryManager.find("bank","agent",searchObject));
         System.out.println(queryManager.findAll("bank","agent"));
-    }
-}
