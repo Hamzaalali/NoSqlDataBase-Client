@@ -1,0 +1,30 @@
+
+\
+java:S1192!"FDefine a constant instead of duplicating this literal "agent" 8 times.(èïŞ»
+]
+java:S1192"GDefine a constant instead of duplicating this literal "phones" 5 times.(”³÷®
+a
+java:S1192"KDefine a constant instead of duplicating this literal "firstName" 12 times.(Ã´Œ
+b
+java:S1192"GDefine a constant instead of duplicating this literal "number" 5 times.(¯ì–áÿÿÿÿÿ
+\
+java:S1192,"FDefine a constant instead of duplicating this literal "alali" 4 times.(şÉß™
+\
+java:S1192/"FDefine a constant instead of duplicating this literal "hamza" 6 times.(Í±»ª
+b
+java:S1192 "GDefine a constant instead of duplicating this literal "credit" 5 times.(”í¢øÿÿÿÿ
+a
+java:S1192"KDefine a constant instead of duplicating this literal "secondName" 5 times.(Æå·İ
+T
+java:S1854i"9Remove this useless assignment to local variable "phone".(æ¡šóıÿÿÿÿ
+U
+java:S1854h":Remove this useless assignment to local variable "phones".(›û®óøÿÿÿÿ
+V	java:S125n"<This block of commented-out lines of code should be removed.(«‚ö§şÿÿÿÿ
+S	java:S106z"9Replace this use of System.out or System.err by a logger.(ÜõÒ”ûÿÿÿÿ
+N	java:S106{"9Replace this use of System.out or System.err by a logger.(×ş´œ
+d
+java:S1128"HRemove this unused import 'org.example.bootstrapper.BootstrapperClient'.(ºª÷*8üÄôÂÇ0
+S
+java:S1128"1Remove this unused import 'java.net.InetAddress'.(ë³ƒÒÿÿÿÿÿ8ıÄôÂÇ0
+\
+java:S1128	":Remove this unused import 'java.net.UnknownHostException'.(Ú·¬˜úÿÿÿÿ8ıÄôÂÇ0

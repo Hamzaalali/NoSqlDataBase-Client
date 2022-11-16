@@ -13,9 +13,9 @@ public class CreateDatabaseQuery extends DatabaseQuery {
     public JSONObject execute(JSONObject query, Socket socket) {
         try{
             ServerClientCommunicator.sendJson(socket,query);
-            JSONObject message= ServerClientCommunicator.readJson(socket);
-            queryManager.handleMessage(message,query);
-            return message;
+            JSONObject messageFromServer= ServerClientCommunicator.readJson(socket);
+            return  queryManager.handleMessage(messageFromServer,query);
+
         }catch (Exception e) {
             throw new RuntimeException(e);
         }

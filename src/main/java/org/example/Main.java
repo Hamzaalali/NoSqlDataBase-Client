@@ -67,20 +67,20 @@ public class Main {
 
 
 
-//        agent=new JSONObject();
-//        name=new JSONObject();
-//        phones=new ArrayList<>();
-//        phone=new JSONObject();
-//        phone.put("number","0796992566");
-//        phones.add(phone);
-//        agent.put("phones",phones);
-//        name.put("firstName","ahmad");
-//        name.put("secondName","alali");
-//        agent.put("name", name);
-//        agent.put("credit",20);
-//        agent.put("firstName","hamza");
-//
-//        queryManager.createDocument("bank","agent",agent);
+        agent=new JSONObject();
+        name=new JSONObject();
+        phones=new ArrayList<>();
+        phone=new JSONObject();
+        phone.put("number","0796992566");
+        phones.add(phone);
+        agent.put("phones",phones);
+        name.put("firstName","ahmad");
+        name.put("secondName","alali");
+        agent.put("name", name);
+        agent.put("credit",20);
+        agent.put("firstName","hamza");
+
+        queryManager.createDocument("bank","agent",agent);
 
         Thread.sleep(3000);
 

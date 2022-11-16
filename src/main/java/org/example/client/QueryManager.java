@@ -132,31 +132,30 @@ public class QueryManager {
         jsonObject.put("queryType", QueryType.PING.toString());
         return execute(jsonObject);
     }
-    public void handleMessage(JSONObject messageFromServer,JSONObject query) throws IOException, ParseException, ClassNotFoundException {
+    public JSONObject handleMessage(JSONObject messageFromServer,JSONObject query) throws IOException, ParseException, ClassNotFoundException {
         if(((Long)messageFromServer.get("code_number"))==1){
             throw new RuntimeException((String) messageFromServer.get("error_message"));
         }
         if(((Long)messageFromServer.get("code_number"))==2){
             System.out.println("redirect");
-            redirect((JSONArray) messageFromServer.get("ports"),query,messageFromServer);
+            return redirect((JSONArray) messageFromServer.get("ports"),query);
         }
+        return messageFromServer;
     }
-    public Object redirect(JSONArray ports,JSONObject query,JSONObject messageFromServer) throws IOException, ParseException, ClassNotFoundException {
+    public JSONObject redirect(JSONArray ports,JSONObject query) throws IOException, ParseException, ClassNotFoundException {
         for(int i=0;i<ports.size();i++){
             long port= (long) ((JSONObject)ports.get(i)).get("port");
             socket=new Socket(hostUrl, (int) port);
             login(username,password);
-            messageFromServer=pingServer();
+            JSONObject messageFromServer=pingServer();
             if(((Long)messageFromServer.get("code_number"))==2){
                 continue;//server is over loaded
             }
             if(((Long)messageFromServer.get("code_number"))==1){
                 throw new RuntimeException((String) messageFromServer.get("error_message"));
             }
-            messageFromServer=execute(query);
-            break;
+            return execute(query);
         }
-        return messageFromServer;
+        return null;
     }
-
 }

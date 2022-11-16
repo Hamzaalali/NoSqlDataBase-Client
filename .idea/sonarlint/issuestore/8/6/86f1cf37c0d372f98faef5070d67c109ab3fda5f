@@ -1,0 +1,25 @@
+
+`	java:S112#"FDefine and throw a dedicated exception instead of using a generic one.(Á¥ù·üÿÿÿÿ
+`	java:S112&"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+a	java:S112‰"FDefine and throw a dedicated exception instead of using a generic one.(Á¥ù·üÿÿÿÿ
+a	java:S112›"FDefine and throw a dedicated exception instead of using a generic one.(Á¥ù·üÿÿÿÿ
+i
+java:S1192#"NDefine a constant instead of duplicating this literal "error_message" 3 times.(Á¥ù·üÿÿÿÿ
+i
+java:S1192-"NDefine a constant instead of duplicating this literal "databaseName" 10 times.(É­ïÜÿÿÿÿÿ
+j
+java:S1192:"ODefine a constant instead of duplicating this literal "collectionName" 8 times.(íˆ‚Çÿÿÿÿÿ
+f
+java:S1192,"KDefine a constant instead of duplicating this literal "queryType" 12 times.(óÏÂœıÿÿÿÿ
+b
+java:S1192""LDefine a constant instead of duplicating this literal "code_number" 5 times.(£Â¡Ø
+S	java:S106("9Replace this use of System.out or System.err by a logger.(úƒá¥üÿÿÿÿ
+ƒ
+java:S1130‚"lRemove the declaration of thrown exception 'java.io.IOException', as it cannot be thrown from method's body.(Ğª½ï
+•
+java:S1130‚"~Remove the declaration of thrown exception 'org.json.simple.parser.ParseException', as it cannot be thrown from method's body.(Ğª½ï
+
+java:S1130‚"yRemove the declaration of thrown exception 'java.lang.ClassNotFoundException', as it cannot be thrown from method's body.(Ğª½ï
+O	java:S106Œ"9Replace this use of System.out or System.err by a logger.(„‘ëÚ
+B
+java:S1168Ÿ"$Return an empty map instead of null.(¥¹ï8†¬ŞñÇ0

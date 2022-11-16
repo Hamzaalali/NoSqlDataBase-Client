@@ -24,10 +24,8 @@ public class FindQuery extends DatabaseQuery {
         try{
             ServerClientCommunicator.sendJson(socket,query);
             JSONObject messageFromServer= ServerClientCommunicator.readJson(socket);
-            System.out.println(messageFromServer);
-            queryManager.handleMessage(messageFromServer,query);
-            System.out.println(messageFromServer);
-            return messageFromServer;
+            return  queryManager.handleMessage(messageFromServer,query);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

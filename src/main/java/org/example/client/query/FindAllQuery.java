@@ -19,8 +19,7 @@ public class FindAllQuery extends DatabaseQuery {
         try{
             ServerClientCommunicator.sendJson(socket,query);
             JSONObject messageFromServer= ServerClientCommunicator.readJson(socket);
-            queryManager.handleMessage(messageFromServer,query);
-            return messageFromServer;
+            return  queryManager.handleMessage(messageFromServer,query);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
