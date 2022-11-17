@@ -1,0 +1,8 @@
+
+g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8ÕÏÙÃÇ0
+N
+java:S1128",Remove this unused import 'jdk.net.Sockets'.(ûÑ­òşÿÿÿÿ8­–óñÇ0
+]
+java:S1128"@Remove this unused import 'org.example.server_client.QueryType'.(üØÛè8­–óñÇ0
+Q
+java:S1128	"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8®–óñÇ0

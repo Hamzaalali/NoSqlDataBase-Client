@@ -138,13 +138,14 @@ public class QueryManager {
         }
         if(((Long)messageFromServer.get("code_number"))==2){
             System.out.println("redirect");
-            return redirect((JSONArray) messageFromServer.get("ports"),query);
+            return redirect((JSONArray) messageFromServer.get("nodes"),query);
         }
         return messageFromServer;
     }
-    public JSONObject redirect(JSONArray ports,JSONObject query) throws IOException, ParseException, ClassNotFoundException {
-        for(int i=0;i<ports.size();i++){
-            long port= (long) ((JSONObject)ports.get(i)).get("port");
+    public JSONObject redirect(JSONArray nodes,JSONObject query) throws IOException, ParseException, ClassNotFoundException {
+        for(int i=0;i<nodes.size();i++){
+            JSONObject nodeJsonObject= (JSONObject) nodes.get(i);
+            long port= (long) nodeJsonObject.get("tcpPort");
             socket=new Socket(hostUrl, (int) port);
             login(username,password);
             JSONObject messageFromServer=pingServer();

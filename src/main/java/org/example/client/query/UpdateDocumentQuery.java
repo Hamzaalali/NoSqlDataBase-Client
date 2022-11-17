@@ -17,6 +17,7 @@ public class UpdateDocumentQuery extends DatabaseQuery{
         try{
             ServerClientCommunicator.sendJson(socket,query);
             JSONObject messageFromServer= ServerClientCommunicator.readJson(socket);
+            System.out.println(messageFromServer.toJSONString());
             return  queryManager.handleMessage(messageFromServer,query);
         } catch (Exception e) {
             throw new RuntimeException(e);

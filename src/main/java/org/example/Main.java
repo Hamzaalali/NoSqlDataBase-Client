@@ -30,6 +30,8 @@ public class Main {
         agentSchema.put("name", name);
         agentSchema.put("firstName",DocumentDataTypes.STRING.toString());
         agentSchema.put("credit",DocumentDataTypes.LONG.toString());
+        agentSchema.put("isMarried",DocumentDataTypes.BOOLEAN.toString());
+        agentSchema.put("salary",DocumentDataTypes.DOUBLE.toString());
         queryManager.createCollection("bank","agent",agentSchema);
 
 
@@ -45,7 +47,8 @@ public class Main {
         agent.put("name",name);
         agent.put("credit",60);
         agent.put("firstName","hamza");
-
+        agent.put("isMarried",false);
+        agent.put("salary",55.5);
         queryManager.createDocument("bank","agent",agent);
 
         Thread.sleep(3000);
@@ -61,26 +64,27 @@ public class Main {
         agent.put("name", name);
         agent.put("credit",50);
         agent.put("firstName","hamza");
-
+        agent.put("isMarried",true);
+        agent.put("salary",55.0);
         queryManager.createDocument("bank","agent",agent);
 
 
-
-
-        agent=new JSONObject();
-        name=new JSONObject();
-        phones=new ArrayList<>();
-        phone=new JSONObject();
-        phone.put("number","0796992566");
-        phones.add(phone);
-        agent.put("phones",phones);
-        name.put("firstName","ahmad");
-        name.put("secondName","alali");
-        agent.put("name", name);
-        agent.put("credit",20);
-        agent.put("firstName","hamza");
-
-        queryManager.createDocument("bank","agent",agent);
+//
+//
+//        agent=new JSONObject();
+//        name=new JSONObject();
+//        phones=new ArrayList<>();
+//        phone=new JSONObject();
+//        phone.put("number","0796992566");
+//        phones.add(phone);
+//        agent.put("phones",phones);
+//        name.put("firstName","ahmad");
+//        name.put("secondName","alali");
+//        agent.put("name", name);
+//        agent.put("credit",20);
+//        agent.put("firstName","hamza");
+//
+//        queryManager.createDocument("bank","agent",agent);
 
         Thread.sleep(3000);
 
@@ -96,6 +100,8 @@ public class Main {
         agent.put("name", name);
         agent.put("credit",60);
         agent.put("firstName","hamza");
+        agent.put("isMarried",false);
+        agent.put("salary",55.5);
         queryManager.createDocument("bank","agent",agent);
 
 
@@ -103,7 +109,7 @@ public class Main {
         JSONObject indexObject=new JSONObject();
         phones=new ArrayList<>();
         phone=new JSONObject();
-        indexObject.put("firstName","");
+        indexObject.put("salary","");
         queryManager.createIndex("bank","agent",indexObject);
 
 //
@@ -112,13 +118,15 @@ public class Main {
 //        name.put("secondName","abuali");
 //        agent.put("name", name);
 //        agent.put("credit",100);
-//        System.out.println(queryManager.updateDocument("bank","agent","b2718526-8a18-440b-bbde-fbc1fef8512b",agent));
-//
+//        System.out.println(queryManager.updateDocument("bank","agent","9e992cad-866f-4312-9e1e-11fb24e3c1ab",agent));
+
 
         JSONObject searchObject=new JSONObject();
         name=new JSONObject();
-        name.put("firstName","hamza");
-        searchObject.put("name",name);
+//        name.put("credit",60);
+        searchObject.put("salary",55.5);
+        System.out.println(queryManager.find("bank","agent",searchObject));
+        searchObject.put("salary",55.0);
         System.out.println(queryManager.find("bank","agent",searchObject));
         System.out.println(queryManager.findAll("bank","agent"));
     }
