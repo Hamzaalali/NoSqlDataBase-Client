@@ -1,15 +1,10 @@
 package org.example;
-import org.example.bootstrapper.BootstrapperClient;
 import org.example.client.NoSQlClient;
 import org.example.client.QueryManager;
-import org.example.server_client.DocumentDataTypes;
+import org.example.json.JsonArrayBuilder;
+import org.example.json.JsonBuilder;
+import org.example.server_client.DataTypes;
 import org.json.simple.JSONObject;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         NoSQlClient noSQlClient=new NoSQlClient();
@@ -18,98 +13,109 @@ public class Main {
         queryManager.login("admin","admin");
         queryManager.createDatabase("bank");
 
-        JSONObject agentSchema=new JSONObject();
-        List<JSONObject>phones=new ArrayList<>();
-        JSONObject phone=new JSONObject();
-        phone.put("number",DocumentDataTypes.STRING.toString());
-        phones.add(phone);
-        agentSchema.put("phones",phones);
-        JSONObject name=new JSONObject();
-        name.put("firstName",DocumentDataTypes.STRING.toString());
-        name.put("secondName",DocumentDataTypes.STRING.toString());
-        agentSchema.put("name", name);
-        agentSchema.put("firstName",DocumentDataTypes.STRING.toString());
-        agentSchema.put("credit",DocumentDataTypes.LONG.toString());
-        agentSchema.put("isMarried",DocumentDataTypes.BOOLEAN.toString());
-        agentSchema.put("salary",DocumentDataTypes.DOUBLE.toString());
+        JSONObject agentSchema= JsonBuilder.getBuilder()
+                .add("name",JsonBuilder.getBuilder()
+                        .add("firstName", DataTypes.STRING)
+                        .add("secondName",DataTypes.STRING)
+                        .build())
+                .add("phoneNumbers", JsonArrayBuilder.getBuilder()
+                        .add(JsonBuilder.getBuilder()
+                                .add("phoneNumber",DataTypes.STRING)
+                                .build())
+                        .build())
+                .add("isMarried",DataTypes.BOOLEAN)
+                .add("salary",DataTypes.DOUBLE)
+                .add("credit",DataTypes.LONG)
+                .build();
         queryManager.createCollection("bank","agent",agentSchema);
 
 
-        JSONObject agent=new JSONObject();
-        name=new JSONObject();
-        phones=new ArrayList<>();
-        phone=new JSONObject();
-        phone.put("number","0796992566");
-        phones.add(phone);
-        agent.put("phones",phones);
-        name.put("firstName","ahmad");
-        name.put("secondName","alali");
-        agent.put("name",name);
-        agent.put("credit",60);
-        agent.put("firstName","hamza");
-        agent.put("isMarried",false);
-        agent.put("salary",55.5);
+        JSONObject agent= JsonBuilder.getBuilder()
+                .add("name",JsonBuilder.getBuilder()
+                        .add("firstName","ahmad")
+                        .add("secondName","alali")
+                        .build())
+                .add("phoneNumbers", JsonArrayBuilder.getBuilder()
+                        .add(JsonBuilder.getBuilder()
+                                .add("phoneNumber","0796992522")
+                                .build())
+                        .add(JsonBuilder.getBuilder()
+                                .add("phoneNumber","0790443286")
+                                .build())
+                        .build())
+                .add("isMarried",true)
+                .add("salary",55.5)
+                .add("credit",100)
+                .build();
         queryManager.createDocument("bank","agent",agent);
 
         Thread.sleep(3000);
-        agent=new JSONObject();
-        name=new JSONObject();
-        phones=new ArrayList<>();
-        phone=new JSONObject();
-        phone.put("number","0796992544");
-        phones.add(phone);
-        agent.put("phones",phones);
-        name.put("firstName","omar");
-        name.put("secondName","alali");
-        agent.put("name", name);
-        agent.put("credit",50);
-        agent.put("firstName","hamza");
-        agent.put("isMarried",true);
-        agent.put("salary",55.0);
+        agent= JsonBuilder.getBuilder()
+                .add("name",JsonBuilder.getBuilder()
+                        .add("firstName","hamza")
+                        .add("secondName","alali")
+                        .build())
+                .add("phoneNumbers", JsonArrayBuilder.getBuilder()
+                        .add(JsonBuilder.getBuilder()
+                                .add("phoneNumber","0795522446")
+                                .build())
+                        .add(JsonBuilder.getBuilder()
+                                .add("phoneNumber","0790443286")
+                                .build())
+                        .build())
+                .add("isMarried",false)
+                .add("salary",55.5)
+                .add("credit",50)
+                .build();
         queryManager.createDocument("bank","agent",agent);
 
 
-//
-//
-//        agent=new JSONObject();
-//        name=new JSONObject();
-//        phones=new ArrayList<>();
-//        phone=new JSONObject();
-//        phone.put("number","0796992566");
-//        phones.add(phone);
-//        agent.put("phones",phones);
-//        name.put("firstName","ahmad");
-//        name.put("secondName","alali");
-//        agent.put("name", name);
-//        agent.put("credit",20);
-//        agent.put("firstName","hamza");
-//
-//        queryManager.createDocument("bank","agent",agent);
+        agent= JsonBuilder.getBuilder()
+                .add("name",JsonBuilder.getBuilder()
+                        .add("firstName","omar")
+                        .add("secondName","abuali")
+                        .build())
+                .add("phoneNumbers", JsonArrayBuilder.getBuilder()
+                        .add(JsonBuilder.getBuilder()
+                                .add("phoneNumber","0796355383")
+                                .build())
+                        .add(JsonBuilder.getBuilder()
+                                .add("phoneNumber","0790443286")
+                                .build())
+                        .build())
+                .add("isMarried",true)
+                .add("salary",55.0)
+                .add("credit",50)
+                .build();
+        queryManager.createDocument("bank","agent",agent);
 
         Thread.sleep(3000);
 
-        agent=new JSONObject();
-        name=new JSONObject();
-        phones=new ArrayList<>();
-        phone=new JSONObject();
-        phone.put("number","0790443286");
-        phones.add(phone);
-        agent.put("phones",phones);
-        name.put("firstName","hamza");
-        name.put("secondName","alali");
-        agent.put("name", name);
-        agent.put("credit",60);
-        agent.put("firstName","hamza");
-        agent.put("isMarried",false);
-        agent.put("salary",55.5);
+
+        agent= JsonBuilder.getBuilder()
+                .add("name",JsonBuilder.getBuilder()
+                        .add("firstName","khalid")
+                        .add("secondName","abuali")
+                        .build())
+                .add("phoneNumbers", JsonArrayBuilder.getBuilder()
+                        .add(JsonBuilder.getBuilder()
+                                .add("phoneNumber","0796355383")
+                                .build())
+                        .add(JsonBuilder.getBuilder()
+                                .add("phoneNumber","0796992522")
+                                .build())
+                        .build())
+                .add("isMarried",false)
+                .add("salary",55.0)
+                .add("credit",100)
+                .build();
         queryManager.createDocument("bank","agent",agent);
 
 
 
-        JSONObject indexObject=new JSONObject();
-        phones=new ArrayList<>();
-        phone=new JSONObject();
-        indexObject.put("salary","");
+        JSONObject indexObject=JsonBuilder.getBuilder()
+                .add("salary","")
+                .build();
         queryManager.createIndex("bank","agent",indexObject);
 
 //
@@ -121,12 +127,13 @@ public class Main {
 //        System.out.println(queryManager.updateDocument("bank","agent","9e992cad-866f-4312-9e1e-11fb24e3c1ab",agent));
 
 
-        JSONObject searchObject=new JSONObject();
-        name=new JSONObject();
-//        name.put("credit",60);
-        searchObject.put("salary",55.5);
+        JSONObject searchObject=JsonBuilder.getBuilder()
+                .add("salary",55.5)
+                .build();
         System.out.println(queryManager.find("bank","agent",searchObject));
-        searchObject.put("salary",55.0);
+        searchObject=JsonBuilder.getBuilder()
+                .add("salary",55.0)
+                .build();
         System.out.println(queryManager.find("bank","agent",searchObject));
         System.out.println(queryManager.findAll("bank","agent"));
     }
