@@ -1,0 +1,19 @@
+
+g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8Ì¹áÃÇ0
+N
+java:S1128",Remove this unused import 'jdk.net.Sockets'.(ûÑ­òşÿÿÿÿ8„–óñÇ0
+]
+java:S1128"@Remove this unused import 'org.example.server_client.QueryType'.(üØÛè8„–óñÇ0
+X
+java:S1128"6Remove this unused import 'org.json.simple.JSONArray'.(àĞ›¢şÿÿÿÿ8…–óñÇ0
+_
+java:S1128"BRemove this unused import 'org.json.simple.parser.ParseException'.(ƒÁ‡8…–óñÇ0
+R
+java:S1128
+"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8…–óñÇ0
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8…–óñÇ0
+K
+java:S1128".Remove this unused import 'java.util.Objects'.(¼¸õ›8…–óñÇ0
+Q
+java:S1128"/Remove this unused import 'java.util.Optional'.(¨˜ëİüÿÿÿÿ8†–óñÇ0

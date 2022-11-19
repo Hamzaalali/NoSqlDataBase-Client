@@ -37,7 +37,6 @@ public class QueryManager {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        System.out.println("logged in ");
     }
     public void createDatabase(String databaseName){
             JSONObject jsonObject=new JSONObject();
@@ -114,7 +113,6 @@ public class QueryManager {
             return (JSONArray) execute(jsonObject).get("data");
     }
     public JSONObject updateDocument(String databaseName,String collectionName,String documentId,JSONObject data){
-
             JSONObject jsonObject=new JSONObject();
             jsonObject.put("queryType",QueryType.UPDATE_DOCUMENT.toString());
             jsonObject.put("databaseName",databaseName);
@@ -137,7 +135,6 @@ public class QueryManager {
             throw new RuntimeException((String) messageFromServer.get("error_message"));
         }
         if(((Long)messageFromServer.get("code_number"))==2){
-            System.out.println("redirect");
             return redirect((JSONArray) messageFromServer.get("nodes"),query);
         }
         return messageFromServer;
@@ -146,6 +143,7 @@ public class QueryManager {
         for(int i=0;i<nodes.size();i++){
             JSONObject nodeJsonObject= (JSONObject) nodes.get(i);
             long port= (long) nodeJsonObject.get("tcpPort");
+            socket.close();
             socket=new Socket(hostUrl, (int) port);
             login(username,password);
             JSONObject messageFromServer=pingServer();
@@ -155,8 +153,10 @@ public class QueryManager {
             if(((Long)messageFromServer.get("code_number"))==1){
                 throw new RuntimeException((String) messageFromServer.get("error_message"));
             }
+            System.out.println("REDIRECTED TO NODE :"+(i+1));
             return execute(query);
         }
         return null;
     }
+
 }

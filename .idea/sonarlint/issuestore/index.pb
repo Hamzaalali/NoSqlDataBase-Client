@@ -1,10 +1,6 @@
 
 i
 9src/main/java/org/example/server_client/SearchObject.java,f\8\f8296792fc36ee9a2416eab688a2b2098de8ac42
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
-n
->src/main/java/org/example/bootstrapper/BootstrapperClient.java,0\0\00ca15950919ade03556d9bebb8cbbdc896305b1
 b
 2src/main/java/org/example/server_client/Query.java,7\e\7ecd15c733ce857f4a37eae59e487f9a94bb5025
 j
@@ -19,17 +15,15 @@ q
 Asrc/main/java/org/example/client/query/DeleteCollectionQuery.java,8\9\8936850729d1459664902a2f72a6dcf9cf1ab3cb
 l
 <src/main/java/org/example/client/query/CreateIndexQuery.java,2\4\242dde0f17689793046f268348af731001893fb8
-o
-?src/main/java/org/example/client/query/CreateDatabaseQuery.java,8\7\878314186a2766df4d3aa693333081092bf29472
-N
-src/main/java/org/example/test,4\b\4b3b00d737daaffa52970a51c8e03a5cca0fb8e4
 u
 Esrc/main/java/org/example/server_client/ServerClientCommunicator.java,b\4\b43b4222a489649fb4090b492fa260c77b3ed9d1
-p
-@src/main/java/org/example/bootstrapper/BootstrapperRequests.java,f\7\f7298b52e73f4bcb6fc58162bc94b1f82a8b4edf
-n
->src/main/java/org/example/server_client/DocumentDataTypes.java,f\f\ff943bd868684f470184d3b648c72451cdb730a4
 e
 5src/main/java/org/example/client/query/PingQuery.java,8\1\81a0b3f9ac772be8dce6d772e6afec1255e55a0d
-S
-#src/main/java/org/example/json.json,8\2\8210769e3239c89257288182e00697564d4cfc39
+f
+6src/main/java/org/example/server_client/DataTypes.java,0\f\0f00892f862515c8e701ce0211c7d89fd60c4e0e
+e
+5src/main/java/org/example/client/query/FindQuery.java,4\9\49253716d67e2512ce475336dc7b2b1970df953a
+h
+8src/main/java/org/example/client/query/FindAllQuery.java,5\f\5f4101f94c649c68cc7825c36f14d9252eefb914
+q
+Asrc/main/java/org/example/client/query/CreateCollectionQuery.java,b\6\b696a4c3288a6fac527a9679227427b6373013e0
