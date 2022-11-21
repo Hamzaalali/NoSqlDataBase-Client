@@ -11,5 +11,10 @@ public enum QueryType {
     DELETE_COLLECTION,
     DELETE_DOCUMENT,
     UPDATE_DOCUMENT,
+    SYNC_UPDATE_DOCUMENT,
+    ADD_USER,
+    INITIALIZE,
+    REDIRECT,
+    SYNC,
     PING
 }

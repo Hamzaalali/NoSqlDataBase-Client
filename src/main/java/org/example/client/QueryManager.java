@@ -40,19 +40,19 @@ public class QueryManager {
     }
     public void createDatabase(String databaseName){
             JSONObject jsonObject=new JSONObject();
-            jsonObject.put("queryType",QueryType.CREATE_DATABASE.toString());
+            jsonObject.put("commandType",QueryType.CREATE_DATABASE.toString());
             jsonObject.put("databaseName",databaseName);
             execute(jsonObject);
     }
     public void deleteDatabase(String databaseName){
             JSONObject jsonObject=new JSONObject();
-            jsonObject.put("queryType",QueryType.DELETE_DATABASE.toString());
+            jsonObject.put("commandType",QueryType.DELETE_DATABASE.toString());
             jsonObject.put("databaseName",databaseName);
             execute(jsonObject);
     }
     public void createCollection(String databaseName,String collectionName,JSONObject schema){
         JSONObject jsonObject=new JSONObject();
-        jsonObject.put("queryType",QueryType.CREATE_COLLECTION.toString());
+        jsonObject.put("commandType",QueryType.CREATE_COLLECTION.toString());
         jsonObject.put("databaseName",databaseName);
         jsonObject.put("collectionName",collectionName);
         jsonObject.put("schema",schema);
@@ -61,7 +61,7 @@ public class QueryManager {
     public void deleteCollection(String databaseName,String collectionName){
 
             JSONObject jsonObject=new JSONObject();
-            jsonObject.put("queryType",QueryType.DELETE_COLLECTION.toString());
+            jsonObject.put("commandType",QueryType.DELETE_COLLECTION.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
         execute(jsonObject);
@@ -70,7 +70,7 @@ public class QueryManager {
     public void createDocument(String databaseName,String collectionName,JSONObject document){
 
             JSONObject jsonObject=new JSONObject();
-            jsonObject.put("queryType",QueryType.CREATE_DOCUMENT.toString());
+            jsonObject.put("commandType",QueryType.CREATE_DOCUMENT.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             jsonObject.put("document",document);
@@ -80,7 +80,7 @@ public class QueryManager {
     public void deleteDocument(String databaseName,String collectionName,String documentId){
 
             JSONObject jsonObject=new JSONObject();
-            jsonObject.put("queryType",QueryType.DELETE_DOCUMENT.toString());
+            jsonObject.put("commandType",QueryType.DELETE_DOCUMENT.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             jsonObject.put("documentId",documentId);
@@ -90,7 +90,7 @@ public class QueryManager {
     public void createIndex(String databaseName,String collectionName,JSONObject indexProperty){
 
             JSONObject jsonObject=new JSONObject();
-            jsonObject.put("queryType",QueryType.CREATE_INDEX.toString());
+            jsonObject.put("commandType",QueryType.CREATE_INDEX.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             jsonObject.put("indexProperty",indexProperty);
@@ -98,7 +98,7 @@ public class QueryManager {
         }
     public JSONArray find(String databaseName, String collectionName, JSONObject searchObject){
             JSONObject jsonObject=new JSONObject();
-            jsonObject.put("queryType",QueryType.FIND.toString());
+            jsonObject.put("commandType",QueryType.FIND.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             jsonObject.put("searchObject",searchObject);
@@ -107,27 +107,28 @@ public class QueryManager {
     public JSONArray findAll(String databaseName,String collectionName){
 
             JSONObject jsonObject=new JSONObject();
-            jsonObject.put("queryType",QueryType.FIND_ALL.toString());
+            jsonObject.put("commandType",QueryType.FIND_ALL.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             return (JSONArray) execute(jsonObject).get("data");
     }
-    public JSONObject updateDocument(String databaseName,String collectionName,String documentId,JSONObject data){
+    public void updateDocument(String databaseName,String collectionName,String documentId,JSONObject data){
             JSONObject jsonObject=new JSONObject();
-            jsonObject.put("queryType",QueryType.UPDATE_DOCUMENT.toString());
+            jsonObject.put("commandType",QueryType.UPDATE_DOCUMENT.toString());
             jsonObject.put("databaseName",databaseName);
             jsonObject.put("collectionName",collectionName);
             jsonObject.put("documentId",documentId);
             jsonObject.put("data",data);
-            return (JSONObject) execute(jsonObject).get("data");
+            execute(jsonObject);
     }
     private JSONObject execute(JSONObject query){
-        QueryType queryType= QueryType.valueOf((String) query.get("queryType"));
-        return databaseQueryMap.get(queryType).execute(query,socket);
+        QueryType queryType= QueryType.valueOf((String) query.get("commandType"));
+        JSONObject fromServer=databaseQueryMap.get(queryType).execute(query,socket);
+        return fromServer;
     }
     public JSONObject pingServer() throws IOException, ParseException, ClassNotFoundException {
         JSONObject jsonObject=new JSONObject();
-        jsonObject.put("queryType", QueryType.PING.toString());
+        jsonObject.put("commandType", QueryType.PING.toString());
         return execute(jsonObject);
     }
     public JSONObject handleMessage(JSONObject messageFromServer,JSONObject query) throws IOException, ParseException, ClassNotFoundException {

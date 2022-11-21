@@ -5,8 +5,6 @@ b
 2src/main/java/org/example/server_client/Query.java,7\e\7ecd15c733ce857f4a37eae59e487f9a94bb5025
 j
 :src/main/java/org/example/server_client/ClientMessage.java,1\b\1b4d4ae461439a63cd0ed8454fa3736c95c7a8f9
-f
-6src/main/java/org/example/server_client/QueryType.java,f\7\f780d51b729484133f1b0cc760b5d162ad9e3ab7
 o
 ?src/main/java/org/example/client/query/DeleteDocumentQuery.java,1\2\12875b859d543179ba93a91854b6b1167ce53c4d
 o
@@ -27,3 +25,17 @@ h
 8src/main/java/org/example/client/query/FindAllQuery.java,5\f\5f4101f94c649c68cc7825c36f14d9252eefb914
 q
 Asrc/main/java/org/example/client/query/CreateCollectionQuery.java,b\6\b696a4c3288a6fac527a9679227427b6373013e0
+o
+?src/main/java/org/example/client/query/CreateDatabaseQuery.java,8\7\878314186a2766df4d3aa693333081092bf29472
+o
+?src/main/java/org/example/client/query/UpdateDocumentQuery.java,1\1\116e8c82bdbd9385895528c582e387b403095ec9
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+o
+?src/main/java/org/example/client/query/CreateDocumentQuery.java,d\d\ddcab955fa2e2712f66706a48db96c93bc1dd98e
+i
+9src/main/java/org/example/client/query/DatabaseQuery.java,1\5\1566a900fef9c6a7cdef0e6f26bec0604fe10a9e
+p
+@src/main/java/org/example/bootstrapper/BootstrapperRequests.java,f\7\f7298b52e73f4bcb6fc58162bc94b1f82a8b4edf
+a
+1src/main/java/org/example/client/NoSQlClient.java,c\d\cdba0fb95da5d36053fc26f5e24dca7a990d0a77
